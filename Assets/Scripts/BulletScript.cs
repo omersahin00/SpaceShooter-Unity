@@ -6,12 +6,17 @@ public class BulletScript : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 60;
     private SpriteRenderer _spriteRenderer;
+    private ScoreScript _scoreScript;
     public TeamType teamType;
+    private bool hasCollided = false;
 
     void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = true;
+
+        _scoreScript = FindAnyObjectByType<ScoreScript>();
+
 
         if (teamType == TeamType.Friendly)
         {
@@ -40,27 +45,35 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("EnemyShip") && teamType == TeamType.Friendly)
+        if (!hasCollided)
         {
-            EnemyShipScript enemyShipScript = collision.gameObject.GetComponent<EnemyShipScript>();
-            enemyShipScript.ExplosiveYourSelf();
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.CompareTag("Rock") && teamType == TeamType.Friendly)
-        {
-            print("taşa çarptı");
-            RockScript rockScript = collision.gameObject.GetComponent<RockScript>();
-            rockScript.ExplosiveYourSelf();
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.CompareTag("SpaceShip") && teamType == TeamType.Enemy)
-        {
-            // Can işlemleri
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.CompareTag("DeadLine"))
-        {
-            Destroy(gameObject);
+            if (collision.gameObject.CompareTag("EnemyShip") && teamType == TeamType.Friendly)
+            {
+                hasCollided = true;
+                _scoreScript.IncreaseScore(20);
+                EnemyShipScript enemyShipScript = collision.gameObject.GetComponent<EnemyShipScript>();
+                enemyShipScript.ExplosiveYourSelf();
+                Destroy(gameObject);
+            }
+            else if (collision.gameObject.CompareTag("Rock") && teamType == TeamType.Friendly)
+            {
+                hasCollided = true;
+                _scoreScript.IncreaseScore(10);
+                RockScript rockScript = collision.gameObject.GetComponent<RockScript>();
+                rockScript.ExplosiveYourSelf();
+                Destroy(gameObject);
+            }
+            else if (collision.gameObject.CompareTag("SpaceShip") && teamType == TeamType.Enemy)
+            {
+                hasCollided = true;
+                // Can işlemleri
+                Destroy(gameObject);
+            }
+            else if (collision.gameObject.CompareTag("DeadLine"))
+            {
+                hasCollided = true;
+                Destroy(gameObject);
+            }
         }
     }
 }

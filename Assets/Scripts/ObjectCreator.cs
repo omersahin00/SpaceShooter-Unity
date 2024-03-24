@@ -61,7 +61,7 @@ public class ObjectCreator : MonoBehaviour
         int boolean = Random.Range(0, 2);
         if (boolean == 0) rockPosition *= -1;
 
-        Instantiate(rockList[rockIndex], new Vector3(rockPosition, 90f, 7f), Quaternion.identity);
+        Instantiate(rockList[rockIndex], new Vector3(rockPosition, 90f, 15f), Quaternion.identity);
     }
 
 

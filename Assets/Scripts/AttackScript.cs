@@ -8,12 +8,15 @@ public class AttackScript : MonoBehaviour
     public GameObject _bulletPrefab;
     private Timer timer;
     private bool _canAttack = true;
+
+    private GameSpeed gameSpeed;
     private float _attackDelay;
 
     void Start()
     {
         timer = GetComponent<Timer>();
-        _attackDelay = FindAnyObjectByType<GameSpeed>().attackDelay;
+        gameSpeed = FindAnyObjectByType<GameSpeed>();
+        _attackDelay = gameSpeed.attackDelay;
     }
 
 
@@ -25,6 +28,7 @@ public class AttackScript : MonoBehaviour
 
     private void Attack()
     {
+        _attackDelay = gameSpeed.attackDelay;
         float attackInput = Input.GetAxisRaw("Attack");
         if (_canAttack && attackInput == 1)
         {
