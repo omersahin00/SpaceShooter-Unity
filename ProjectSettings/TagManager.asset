@@ -12,6 +12,7 @@ TagManager:
   - SpaceShip
   - EnemyShip
   - DeadLine
+  - Rock
   layers:
   - Default
   - TransparentFX

@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    [SerializeField] private float _attackDelay = 1f;
 
     public GameObject _bulletPrefab;
     private Timer timer;
     private bool _canAttack = true;
+    private float _attackDelay;
 
     void Start()
     {
         timer = GetComponent<Timer>();
+        _attackDelay = FindAnyObjectByType<GameSpeed>().attackDelay;
     }
+
 
     void Update()
     {

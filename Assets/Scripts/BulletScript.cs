@@ -46,6 +46,13 @@ public class BulletScript : MonoBehaviour
             enemyShipScript.ExplosiveYourSelf();
             Destroy(gameObject);
         }
+        else if (collision.gameObject.CompareTag("Rock") && teamType == TeamType.Friendly)
+        {
+            print("taşa çarptı");
+            RockScript rockScript = collision.gameObject.GetComponent<RockScript>();
+            rockScript.ExplosiveYourSelf();
+            Destroy(gameObject);
+        }
         else if (collision.gameObject.CompareTag("SpaceShip") && teamType == TeamType.Enemy)
         {
             // Can işlemleri
