@@ -12,7 +12,7 @@ public class AttackScript : MonoBehaviour
 
     void Start()
     {
-        timer = FindObjectOfType<Timer>();
+        timer = GetComponent<Timer>();
     }
 
     void Update()
@@ -28,7 +28,13 @@ public class AttackScript : MonoBehaviour
         {
             _canAttack = false;
             timer.StartTimer(_attackDelay, CanAttack);
-            Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+
+
+            GameObject bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+            bullet.transform.position = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
+
+            BulletScript bulletScript = bullet.gameObject.GetComponent<BulletScript>();
+            bulletScript.teamType = TeamType.Friendly;
         }
     }
 
