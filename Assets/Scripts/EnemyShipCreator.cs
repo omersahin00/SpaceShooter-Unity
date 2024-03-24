@@ -32,7 +32,7 @@ public class EnemyShipCreator : MonoBehaviour
         int boolean = Random.Range(0, 2);
         if (boolean == 0) shipPosition *= -1;
 
-        GameObject ship = Instantiate(shipList[shipIndex], new Vector3(shipPosition, 90f, 7f), Quaternion.identity);
+        GameObject ship = Instantiate(shipList[shipIndex], new Vector3(shipPosition, 85f, 7f), Quaternion.identity);
         ship.transform.rotation = Quaternion.Euler(90f, 180f, 0f);
     }
 }
