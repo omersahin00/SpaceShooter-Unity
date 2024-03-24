@@ -6,9 +6,13 @@ public class BulletScript : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 60;
     private SpriteRenderer _spriteRenderer;
+
     private ScoreScript _scoreScript;
+    private HeartScript _heartScript;
+
     public TeamType teamType;
     private bool hasCollided = false;
+
 
     void Start()
     {
@@ -16,6 +20,8 @@ public class BulletScript : MonoBehaviour
         _spriteRenderer.enabled = true;
 
         _scoreScript = FindAnyObjectByType<ScoreScript>();
+
+        _heartScript = FindAnyObjectByType<HeartScript>();
 
 
         if (teamType == TeamType.Friendly)
@@ -66,7 +72,7 @@ public class BulletScript : MonoBehaviour
             else if (collision.gameObject.CompareTag("SpaceShip") && teamType == TeamType.Enemy)
             {
                 hasCollided = true;
-                // Can işlemleri
+                _heartScript.DecreaseHeart(0.5f);
                 Destroy(gameObject);
             }
             else if (collision.gameObject.CompareTag("DeadLine"))
