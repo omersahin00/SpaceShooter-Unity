@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class SpaceShipScript : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 50;
+    public GameObject _explosive;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class Movement : MonoBehaviour
         }    
     }
 
+
     private void VerticalMove()
     {
         float verticalInput = Input.GetAxis("Vertical");
@@ -39,4 +41,9 @@ public class Movement : MonoBehaviour
     }
 
 
+    public void ExplosiveYourSelf()
+    {
+        Instantiate(_explosive, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
 }

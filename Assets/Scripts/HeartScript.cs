@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class HeartScript : MonoBehaviour
@@ -21,6 +20,8 @@ public class HeartScript : MonoBehaviour
 
     private List<RawImage> heartList;
 
+    private GameProgressScript gameProgressScript;
+
     void Start()
     {
         heart1 = transform.Find("Heart1").GetComponent<RawImage>();
@@ -32,6 +33,8 @@ public class HeartScript : MonoBehaviour
 
         heartList = new List<RawImage> { heart1, heart2, heart3, heart4, heart5, heart6 };
 
+        gameProgressScript = FindAnyObjectByType<GameProgressScript>();
+
         UpdateHeartImage();
     }
 
@@ -39,7 +42,15 @@ public class HeartScript : MonoBehaviour
     public void DecreaseHeart(float amount)
     {
         if (heartPoint > 0)
+        {
             heartPoint -= amount;
+            if (heartPoint <= 0)
+            {
+                heartPoint = 0;
+                gameProgressScript.GameOver();
+            }
+        }
+
         UpdateHeartImage();
     }
 
