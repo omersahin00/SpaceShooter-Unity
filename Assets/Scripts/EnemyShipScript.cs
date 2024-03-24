@@ -41,7 +41,6 @@ public class EnemyShipScript : MonoBehaviour
             else if (collision.gameObject.CompareTag("SpaceShip"))
             {
                 hasCollided = true;
-                print("çarpışma algılandı");
                 heartScript.DecreaseHeart(1f);
                 ExplosiveYourSelf();
             }
