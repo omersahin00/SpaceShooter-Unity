@@ -30,7 +30,7 @@ public class GameSpeed : MonoBehaviour
             spawnDelay -= Random.Range(0.02f, 0.08f);
 
         if (attackDelay >= 0.1f)
-            attackDelay -= Random.Range(0.009f, 0.02f);
+            attackDelay -= Random.Range(0.009f, 0.017f);
 
         if (spawnDelay <= 0.1f && attackDelay <= 0.1f)
             canRun = false;
