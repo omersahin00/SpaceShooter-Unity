@@ -26,13 +26,13 @@ public class GameSpeed : MonoBehaviour
 
     public void SlowDown()
     {
-        if (spawnDelay <= 0.1f)
-            canRun = false;
-
-        else
-        {
+        if (spawnDelay >= 0.1f)
             spawnDelay -= Random.Range(0.02f, 0.08f);
+
+        if (attackDelay >= 0.1f)
             attackDelay -= Random.Range(0.009f, 0.02f);
-        }
+
+        if (spawnDelay <= 0.1f && attackDelay <= 0.1f)
+            canRun = false;
     }
 }
