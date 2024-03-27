@@ -7,6 +7,7 @@ public class GameProgressScript : MonoBehaviour
 {
     public AudioSource audioSource;
     private SpaceShipScript spaceShipScript;
+    private ScoreScript scoreScript;
 
     private Timer timer;
 
@@ -14,6 +15,7 @@ public class GameProgressScript : MonoBehaviour
     void Start()
     {
         spaceShipScript = FindAnyObjectByType<SpaceShipScript>();
+        scoreScript = FindAnyObjectByType<ScoreScript>();
         timer = GetComponent<Timer>();
     }
 
@@ -23,6 +25,9 @@ public class GameProgressScript : MonoBehaviour
         audioSource.Stop();
         spaceShipScript.ExplosiveYourSelf();
         timer.StartTimer(3f, RenderGameOver);
+
+        PlayerPrefs.SetInt("Score", scoreScript.GetScore());
+        PlayerPrefs.Save();
     }
 
 

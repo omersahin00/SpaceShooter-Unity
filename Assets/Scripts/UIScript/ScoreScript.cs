@@ -34,4 +34,10 @@ public class ScoreScript : MonoBehaviour
     {
         scoreText.text = "Score: " + score.ToString();
     }
+
+
+    public int GetScore()
+    {
+        return score;
+    }
 }
