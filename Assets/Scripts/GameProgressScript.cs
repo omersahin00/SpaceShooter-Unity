@@ -49,7 +49,8 @@ public class GameProgressScript : MonoBehaviour
 
     public void PauseGame()
     {
-        onPause = true;
+        onPause = true;        
+        audioSource.Pause();
         Time.timeScale = 0f;
         pausePanel.SetActive(true);
     }
@@ -57,6 +58,7 @@ public class GameProgressScript : MonoBehaviour
     public void ContinueGame()
     {
         onPause = false;
+        audioSource.UnPause();
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
     }

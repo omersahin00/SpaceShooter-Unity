@@ -7,6 +7,7 @@ public class EnemyShipScript : MonoBehaviour
     [SerializeField] private float _moveSpeed = 10;
     public GameObject _explosive;
     private HeartScript heartScript;
+    private ScoreScript scoreScript;
 
     private bool hasCollided = false;
 
@@ -14,6 +15,7 @@ public class EnemyShipScript : MonoBehaviour
     void Start()
     {
         heartScript = FindAnyObjectByType<HeartScript>();
+        scoreScript = FindAnyObjectByType<ScoreScript>();
     }
 
 
@@ -36,6 +38,7 @@ public class EnemyShipScript : MonoBehaviour
             if (collision.gameObject.CompareTag("DeadLine"))
             {
                 hasCollided = true;
+                scoreScript.DecreaseScore(10);
                 Destroy(gameObject);
             }
             else if (collision.gameObject.CompareTag("SpaceShip"))

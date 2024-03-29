@@ -7,6 +7,7 @@ public class RockScript : MonoBehaviour
     Rigidbody rb;
     public GameObject _explosive;
     private HeartScript _heartScript;
+    private ScoreScript _scoreScript;
 
     float randomRotateX;
     float randomRotateY;
@@ -22,6 +23,7 @@ public class RockScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         _heartScript = FindAnyObjectByType<HeartScript>();
+        _scoreScript = FindAnyObjectByType<ScoreScript>();
 
         randomRotateX = Random.Range(0f, 360f);
         randomRotateY = Random.Range(0f, 360f);
@@ -48,6 +50,7 @@ public class RockScript : MonoBehaviour
             if (collision.gameObject.CompareTag("DeadLine"))
             {
                 hasCollided = true;
+                _scoreScript.DecreaseScore(5);
                 Destroy(gameObject);
             }
             else if (collision.gameObject.CompareTag("SpaceShip"))

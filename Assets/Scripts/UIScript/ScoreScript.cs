@@ -26,6 +26,7 @@ public class ScoreScript : MonoBehaviour
     public void DecreaseScore(int amount)
     {
         score -= amount;
+        if (score < 0) score = 0;
         UpdateScoreText();
     }
 
